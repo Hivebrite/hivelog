@@ -37,7 +37,7 @@ module Hivelog
         timestamp: Time.now.utc,
         level: level,
         message: message,
-        ecs: { version: Hivelog.ECS_VERSION }
+        ecs: { version: Hivelog::ECS_VERSION }
       }.merge(options)
     end
 
