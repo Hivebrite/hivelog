@@ -25,7 +25,7 @@ module Hivelog
     def create_message(level, message, options = {})
       payload = build_payload(level, message, options)
       if @output == :elasticsearch
-        @client.index index: generate_index(payload[:timestamp]), body: payload
+        @client.index index: generate_index(payload[:"@timestamp"]), body: payload
       elsif @output == :stdout
         STDOUT.print payload.to_json
       end
@@ -34,9 +34,9 @@ module Hivelog
     def build_payload(level, message, options = {})
       payload = {
         labels: @labels,
-        timestamp: Time.now.utc,
         level: level,
         message: message,
+        "@timestamp": Time.now.utc,
         ecs: { version: Hivelog::ECS_VERSION }
       }.merge(options)
     end
