@@ -23,7 +23,7 @@ module Hivelog
     end
     
     def create_message(level, message, options = {})
-      payload = build_payload(level, message, options)
+      payload = build_payload(level, message, options.to_h)
       if @output == :elasticsearch
         @client.index index: generate_index(payload[:"@timestamp"]), body: payload
       elsif @output == :stdout
