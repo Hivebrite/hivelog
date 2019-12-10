@@ -38,9 +38,13 @@ RSpec.describe Hivelog::Logger do
       name: "John Smith",
       type: "User"      
     }
+    organization = {
+      id: 123,
+      name: "Notre Dame"
+    }
     group = {
       id: 5,
-      name: "EM PARIS"
+      name: "Chicago group"
     }
     tags = ["production", "env2"]
     options = {
