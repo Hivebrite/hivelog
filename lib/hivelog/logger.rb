@@ -27,7 +27,7 @@ module Hivelog
       if @output == :elasticsearch
         @client.index index: generate_index(payload[:"@timestamp"]), body: payload
       elsif @output == :stdout
-        STDOUT.print payload.to_json
+        STDOUT.print(payload.to_json + "\n")
       end
     end
 
