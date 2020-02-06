@@ -22,7 +22,7 @@ RSpec.describe Hivelog::Logger do
 
   it "can build an event payload" do
     logger = Hivelog::Logger.new(:stdout, @labels)
-    event_dataset = {
+    custom_fields = {
       email: "foobar@hiverite.com",
       type: "sent",
       timestamp: Time.now,
@@ -31,7 +31,7 @@ RSpec.describe Hivelog::Logger do
       action: "sent",
       id: "12345",
       category: "email",
-      dataset: event_dataset,
+      custom_fields: custom_fields,
     }
     user = {
       id: 123,
