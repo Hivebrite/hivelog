@@ -8,10 +8,10 @@ RSpec.describe Hivelog::Logger do
 
   context "Elasticsearch output" do
     it "has an Elasticsearch client" do
-      url =  "localhost:9200"
-      logger = Hivelog::Logger.new(:elasticsearch, @labels, url)
+      url = "localhost:9200"
+      logger = Hivelog::Logger.new(:elasticsearch, :warn, @labels, url)
       expect(logger.client).not_to be nil
-    end  
+    end
   end
 
   Hivelog::Logger::LOG_LEVELS.each do |level|
@@ -21,7 +21,7 @@ RSpec.describe Hivelog::Logger do
   end
 
   it "can build an event payload" do
-    logger = Hivelog::Logger.new(:stdout, @labels)
+    logger = Hivelog::Logger.new(:stdout, :warn, @labels)
     custom_fields = {
       email: "foobar@hiverite.com",
       type: "sent",
@@ -60,10 +60,16 @@ RSpec.describe Hivelog::Logger do
   end
 
   it "can send a debug message" do
-    logger = Hivelog::Logger.new(:stdout, @labels)
+    logger = Hivelog::Logger.new(:stdout, :debug, @labels)
     options = {}
     expect(logger).to receive(:create_message).and_return(true)
     logger.debug("debbbbb", options)
   end
 
+  it "do not send a lower level message" do
+    logger = Hivelog::Logger.new(:stdout, :warn, @labels)
+    options = {}
+    expect(logger).not_to receive(:build_payload)
+    logger.info("debbbbb", options)
+  end
 end

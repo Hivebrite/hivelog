@@ -4,7 +4,7 @@ require 'json'
 
 module Hivelog
   class Logger
-    attr_accessor :client, :labels, :output
+    attr_accessor :client, :labels, :output, :min_level
 
     LOG_LEVELS = [:debug, :info, :warn, :error, :fatal, :panic]
     OUTPUT = [:stdout, :elasticsearch]
@@ -14,7 +14,8 @@ module Hivelog
       end
     end
 
-    def initialize(op, labels = {}, url = nil)
+    def initialize(op, min_level, labels = {}, url = nil)
+      @min_level = min_level
       @output = op
       if OUTPUT.include?(output) && output == :elasticsearch
         @client = Elasticsearch::Client.new host: url
@@ -23,6 +24,7 @@ module Hivelog
     end
     
     def create_message(level, message, options = {})
+      return if LOG_LEVELS.index(@min_level) > LOG_LEVELS.index(level)
       payload = build_payload(level, message, options.to_h)
       if @output == :elasticsearch
         @client.index index: generate_index(payload[:"@timestamp"]), body: payload
