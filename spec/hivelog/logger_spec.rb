@@ -34,16 +34,16 @@ RSpec.describe Hivelog::Logger do
       custom_fields: custom_fields,
     }
     user = {
-      id: 123,
+      id: "123",
       name: "John Smith",
       type: "User"      
     }
     organization = {
-      id: 123,
+      id: "123",
       name: "Notre Dame"
     }
     group = {
-      id: 5,
+      id: "5",
       name: "Chicago group"
     }
     tags = ["production", "env2"]
