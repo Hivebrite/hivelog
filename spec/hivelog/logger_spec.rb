@@ -56,7 +56,9 @@ RSpec.describe Hivelog::Logger do
     payload = logger.build_payload("debug", "toto", options)
     expect(payload[:level]).to eq "debug"
     expect(payload[:message]).to eq "toto"
-    expect(payload[:labels]).to eq @labels
+    expect(payload[:labels][:payload]).to eq "hivelog"
+    expect(payload[:labels][:environment]).to eq "production"
+    expect(payload[:labels][:application]).to eq "ror"
   end
 
   it "can send a debug message" do

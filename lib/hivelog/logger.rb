@@ -20,7 +20,7 @@ module Hivelog
       if OUTPUT.include?(output) && output == :elasticsearch
         @client = Elasticsearch::Client.new host: url
       end
-      @labels = labels
+      @labels = labels.merge({"payload": "hivelog"})
     end
     
     def create_message(level, message, options = {})
