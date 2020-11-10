@@ -14,11 +14,11 @@ module Hivelog
       end
     end
 
-    def initialize(op, min_level, labels = {}, url = nil)
+    def initialize(op, min_level, labels = {}, es_options = {})
       @min_level = min_level
       @output = op
       if OUTPUT.include?(output) && output == :elasticsearch
-        @client = Elasticsearch::Client.new host: url
+        @client = Elasticsearch::Client.new hosts: [es_options]
       end
       @labels = labels.merge({"payload": "hivelog"})
     end

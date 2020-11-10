@@ -8,8 +8,13 @@ RSpec.describe Hivelog::Logger do
 
   context "Elasticsearch output" do
     it "has an Elasticsearch client" do
-      url = "localhost:9200"
-      logger = Hivelog::Logger.new(:elasticsearch, :warn, @labels, url)
+      host = "localhost"
+      es_options = {
+        host: host,
+        user: "hivebrite",
+        password: "12345"
+      }
+      logger = Hivelog::Logger.new(:elasticsearch, :warn, @labels, es_options)
       expect(logger.client).not_to be nil
     end
   end
