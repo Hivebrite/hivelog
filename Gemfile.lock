@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hivelog (0.1.4)
+    hivelog (0.1.5)
       elasticsearch (~> 7.9.0)
 
 GEM

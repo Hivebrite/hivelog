@@ -25,11 +25,24 @@ module Hivelog
     
     def create_message(level, message, options = {})
       return if LOG_LEVELS.index(@min_level) > LOG_LEVELS.index(level)
-      payload = build_payload(level, message, options.to_h)
-      if @output == :elasticsearch
-        @client.index index: generate_index(payload[:"@timestamp"]), body: payload
-      elsif @output == :stdout
-        STDOUT.print(payload.to_json + "\n")
+      if options.is_a?(Array) && @output == :elasticsearch
+        es_bulk_insert(level, message, options)
+      else
+        payload = build_payload(level, message, options.to_h)
+        if @output == :elasticsearch
+          @client.index index: generate_index(payload[:"@timestamp"]), body: payload
+        elsif @output == :stdout
+          STDOUT.print(payload.to_json + "\n")
+        end
+      end
+    end
+
+    def es_bulk_insert(level, message, a_ops)
+      es_body = []
+      a_ops.each do |ops|
+        payload = build_payload(level, message, ops.to_h)
+        es_body << { index:  { _index: generate_index(payload[:"@timestamp"]), data: es_body } }
+        @client.bulk(body: es_body)
       end
     end
 

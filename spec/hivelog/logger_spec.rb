@@ -7,15 +7,25 @@ RSpec.describe Hivelog::Logger do
   end
 
   context "Elasticsearch output" do
-    it "has an Elasticsearch client" do
+    before(:each) do
       host = "localhost"
-      es_options = {
+      @es_options = {
         host: host,
         user: "hivebrite",
         password: "12345"
       }
-      logger = Hivelog::Logger.new(:elasticsearch, :warn, @labels, es_options)
+    end
+    it "has an Elasticsearch client" do
+      logger = Hivelog::Logger.new(:elasticsearch, :warn, @labels, @es_options)
       expect(logger.client).not_to be nil
+    end
+
+    it "can send a elasticsearch bulk message" do
+      logger = Hivelog::Logger.new(:elasticsearch, :debug, @labels, @es_options)
+      options = {}
+      a_ops = [options]
+      expect(logger).to receive(:es_bulk_insert)
+      logger.debug("debbbbb", a_ops)
     end
   end
 
