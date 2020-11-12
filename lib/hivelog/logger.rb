@@ -38,12 +38,11 @@ module Hivelog
     end
 
     def es_bulk_insert(level, message, a_ops)
-      es_body = []
-      a_ops.each do |ops|
-        payload = build_payload(level, message, ops)
-        es_body << { index:  { _index: generate_index(payload[:"@timestamp"]), data: es_body } }
-        @client.bulk(body: es_body)
-      end
+      es_body = a_ops.map do |ops|
+          payload = build_payload(level, message, ops)
+          { index:  { _index: generate_index(payload[:"@timestamp"]), data: payload } }
+        end
+      @client.bulk(body: es_body)
     end
 
     def build_payload(level, message, options = {})
