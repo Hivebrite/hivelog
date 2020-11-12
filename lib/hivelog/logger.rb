@@ -28,7 +28,7 @@ module Hivelog
       if options.is_a?(Array) && @output == :elasticsearch
         es_bulk_insert(level, message, options)
       else
-        payload = build_payload(level, message, options.to_h)
+        payload = build_payload(level, message, options)
         if @output == :elasticsearch
           @client.index index: generate_index(payload[:"@timestamp"]), body: payload
         elsif @output == :stdout
@@ -40,7 +40,7 @@ module Hivelog
     def es_bulk_insert(level, message, a_ops)
       es_body = []
       a_ops.each do |ops|
-        payload = build_payload(level, message, ops.to_h)
+        payload = build_payload(level, message, ops)
         es_body << { index:  { _index: generate_index(payload[:"@timestamp"]), data: es_body } }
         @client.bulk(body: es_body)
       end
@@ -53,7 +53,7 @@ module Hivelog
         message: message,
         "@timestamp": Time.now.utc,
         ecs: { version: Hivelog::ECS_VERSION }
-      }.merge(options)
+      }.merge(options.to_h)
     end
 
     def generate_index(event_time)
