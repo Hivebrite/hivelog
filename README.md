@@ -27,15 +27,30 @@ Or install it yourself as:
       environment: "production",
       application: "ror"
     }
-    logger = Hivelog::Logger.new(:stdout, @labels)
+
     options = {
       event: event,
       user: user,
       group: group,
       tags: tags
     }
-    logger.debug("deb ya", options)
+
+    Hivelogger = Hivelog::Logger.new(:stdout, @labels)
+
+    Hivelogger.debug("deb ya", options)
+    Hivelogger.warn("warning message", options)
+    Hivelogger.info("information message", options)
+    Hivelogger.error("error message", options)
 ```
+
+Each log is a sentence. A sentence always starts with capitalization and ends with a period.
+
+Please scope the service with `tags` (e.g.: `Donations`, `NetworkEvents`, `Recurly`, ...). It will help for filtering.
+
+All logs are not necessary an error. Please, type your logs.
+You can use : `info`, `warn`, `error` and `debug`. 
+
+FYI: Hivelogger writes logs on stdout on local by default.
 
 ## License
 
