@@ -47,10 +47,9 @@ Each log is a sentence. A sentence always starts with capitalization and ends wi
 
 Please scope the service with `tags` (e.g.: `Donations`, `NetworkEvents`, `Recurly`, ...). It will help for filtering.
 
-All logs are not necessary an error. Please, type your logs.
-You can use : `info`, `warn`, `error` and `debug`. 
+Logs are not only for errors. Please use the appropriate method, whether that be `info`, `warn`, `error` or `debug`.
 
-FYI: Hivelogger writes logs on stdout on local by default.
+Please note that Hivelogger writes logs to `stdout` by default on your development environment.
 
 ## License
 
