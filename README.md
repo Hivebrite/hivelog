@@ -45,7 +45,17 @@ Or install it yourself as:
 
 Each log is a sentence. A sentence always starts with capitalization and ends with a period.
 
-Please scope the service with `tags` (e.g.: `Donations`, `NetworkEvents`, `Recurly`, ...). It will help for filtering.
+Please scope the service in `service`, the module in `module` and the scope with `tags` (e.g.: `donations`, `payment`, `recurly`, ...). It will help for filtering.
+
+```ruby
+    options = {
+      service: 'webapp',
+      module: 'topics',
+      tags: ['memberships', 'payment'],
+    }
+
+    Hivelogger.info("information message", options)
+```
 
 Logs are not only for errors. Please use the appropriate method, whether that be `info`, `warn`, `error` or `debug`.
 
