@@ -45,12 +45,17 @@ Or install it yourself as:
 
 Each log is a sentence. A sentence always starts with capitalization and ends with a period.
 
-Please scope the service in `service`, the module in `module` and the scope with `tags` (e.g.: `donations`, `payment`, `recurly`, ...). It will help for filtering.
+
+Hivelog's schema should respect ECS definitions for 2 mains reasons:
+- To avoid ES index mapping conflits
+- More readable for search and analytics
+
+You can find Guideline of ECS version 1.4 [here](https://www.elastic.co/guide/en/ecs/1.4/ecs-guidelines.html).
+
+Please scope with `tags` (e.g.: `donations`, `payment`, `recurly`, ...). It will help for filtering.
 
 ```ruby
     options = {
-      service: 'webapp',
-      module: 'topics',
       tags: ['memberships', 'payment'],
     }
 
