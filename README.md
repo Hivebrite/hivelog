@@ -50,7 +50,7 @@ Hivelog's schema should respect ECS definitions for 2 mains reasons:
 - To avoid ES index mapping conflits
 - More readable for search and analytics
 
-You can find Guideline of ECS version 1.4 [here](https://www.elastic.co/guide/en/ecs/1.4/ecs-guidelines.html).
+You can find Guideline of ECS version 1.7 (current version) [here](https://www.elastic.co/guide/en/ecs/1.7/ecs-guidelines.html).
 
 Please scope with `tags` (e.g.: `donations`, `payment`, `recurly`, ...). It will help for filtering.
 
