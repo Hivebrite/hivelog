@@ -52,11 +52,14 @@ Hivelog's schema should respect ECS definitions for 2 mains reasons:
 
 You can find Guideline of ECS version 1.7 (current version) [here](https://www.elastic.co/guide/en/ecs/1.7/ecs-guidelines.html).
 
-Please scope with `tags` (e.g.: `donations`, `payment`, `recurly`, ...). It will help for filtering.
+Each log should contain mandatory fields `event.action` and `event.category` which will explicitly add keywords for search & filtering. You can find more informations [here](https://www.elastic.co/guide/en/ecs/1.7/ecs-event.html)
 
 ```ruby
     options = {
-      tags: ['memberships', 'payment'],
+      event: {
+        action: 'xxx',
+        category: 'xxx',
+      },
     }
 
     Hivelogger.info("information message", options)
