@@ -47,7 +47,7 @@ Each log is a sentence, meaning it shoud always start with a capital letter and 
 
 Hivelog's schema should respect [ECS guidelines](https://www.elastic.co/guide/en/ecs/1.7/ecs-guidelines.html) (current version is 1.7) for 2 main reasons:
 
-- To avoid ElasticSearch index mapping conflits
+- To avoid ElasticSearch index mapping conflicts
 - To ease readability for search and analytics
 
 Each log should contain mandatory fields `event.action` and `event.category` which will explicitly add keywords for search & filtering. You can find more information [here](https://www.elastic.co/guide/en/ecs/1.7/ecs-event.html)
