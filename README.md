@@ -43,22 +43,20 @@ Or install it yourself as:
     Hivelogger.error("error message", options)
 ```
 
-Each log is a sentence. A sentence always starts with capitalization and ends with a period.
+Each log is a sentence, meaning it shoud always start with a capital letter and end with a period.
 
+Hivelog's schema should respect [ECS guidelines](https://www.elastic.co/guide/en/ecs/1.7/ecs-guidelines.html) (current version is 1.7) for 2 main reasons:
 
-Hivelog's schema should respect ECS definitions for 2 mains reasons:
-- To avoid ES index mapping conflits
-- More readable for search and analytics
+- To avoid ElasticSearch index mapping conflits
+- To ease readability for search and analytics
 
-You can find Guideline of ECS version 1.7 (current version) [here](https://www.elastic.co/guide/en/ecs/1.7/ecs-guidelines.html).
-
-Each log should contain mandatory fields `event.action` and `event.category` which will explicitly add keywords for search & filtering. You can find more informations [here](https://www.elastic.co/guide/en/ecs/1.7/ecs-event.html)
+Each log should contain mandatory fields `event.action` and `event.category` which will explicitly add keywords for search & filtering. You can find more information [here](https://www.elastic.co/guide/en/ecs/1.7/ecs-event.html)
 
 ```ruby
     options = {
       event: {
         action: 'xxx',
-        category: 'xxx',
+        category: ['xxx'],
       },
     }
 
