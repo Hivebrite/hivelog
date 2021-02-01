@@ -1,0 +1,94 @@
+require:
+  - rubocop-rspec
+  - rubocop-performance
+inherit_gem:
+    rubocop-shopify: rubocop.yml
+
+AllCops:
+  NewCops: disable
+  UseCache: true
+  TargetRubyVersion: 2.7.2
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Layout/BlockAlignment:
+  EnforcedStyleAlignWith: start_of_block
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/EmptyLinesAroundModuleBody:
+  EnforcedStyle: empty_lines_except_namespace
+
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines
+
+Layout/EndAlignment:
+  AutoCorrect: true
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/SymbolProc:
+  IgnoredMethods:
+    - respond_to
+    - define_method
+    - node
+    - code
+
+Style/RaiseArgs:
+  EnforcedStyle: compact
+
+Style/PreferredHashMethods:
+  EnforcedStyle: verbose
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/FormatStringToken:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+  CheckMethodNames: false
+  CheckSymbols: false
+
+RSpec/MessageSpies:
+  EnforcedStyle: have_received
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/PredicateMatcher:
+  Enabled: false
+
+Style/LambdaCall:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
