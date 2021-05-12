@@ -57,7 +57,7 @@ module Hivelog
 
     def generate_index(event_time)
       t = event_time.utc
-      "hivelog-#{t.year}.#{t.month}.#{t.day}"
+      t.strftime("hivelog-%Y.%m.%d")
     end
   end
 end
