@@ -23,7 +23,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: Install Dependencies
-      run: rm package.json yarn.lock && npm install --no-package-lock --no-save @commitlint/cli @commitlint/config-conventional
+      run: rm -f package.json yarn.lock && npm install --no-package-lock --no-save @commitlint/cli @commitlint/config-conventional
     - uses: JulienKode/pull-request-name-linter-action@v0.5.0
       with:
         configuration-path: .github/workflows/commitlint.config.js
