@@ -38,9 +38,8 @@ const Configuration = {
       'test'
     ]],
     'scope-case': [2, 'always', 'lower-case'],
-    'scope-enum': [2, 'always', []],
-    'scope-empty': [2, 'always'],
-    'subject-case': [2, 'always', 'lower-case'],
+    'scope-enum': [2, 'always'],
+    'subject-case': [2, 'never', ["sentence-case", "start-case", "pascal-case", "upper-case"]],
     'header-max-length': [2, 'always', 142],
     'header-ending-with-jira-ticket': [2, 'always'],
   },
