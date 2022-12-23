@@ -34,11 +34,9 @@ Summarize the changes that have been made. Include screenshots if any.
 - https://hivebrite.atlassian.net/browse/XXXXX
 -->
 
+<!--
 ## Notes
 
-- [ ] This PR introduces a breaking change
-
-<!--
 - What is the deployment linked to this service
 - Who benefits from this?
 - What could go wrong?
