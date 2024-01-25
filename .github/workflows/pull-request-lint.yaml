@@ -19,11 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && !contains(fromJson('["skip-commit-lint"]'), github.event.pull_request.labels)
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Install Dependencies
-      run: rm -f package.json yarn.lock && npm install --no-package-lock --no-save @commitlint/cli @commitlint/config-conventional
-    - uses: JulienKode/pull-request-name-linter-action@v0.5.0
-      with:
-        configuration-path: .github/workflows/commitlint.config.js
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install Dependencies
+        run: rm -f package.json yarn.lock && npm install --no-package-lock --no-save @commitlint/cli @commitlint/config-conventional@18.5.0
+      - uses: JulienKode/pull-request-name-linter-action@v0.5.0
+        with:
+          configuration-path: .github/workflows/commitlint.config.js
