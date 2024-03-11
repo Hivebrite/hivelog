@@ -1,0 +1,99 @@
+# DO NOT EDIT.
+# This file is managed by the template repository pipeline.
+# https://github.com/Hivebrite/git-template-repository
+#
+# To edit this file open a PR on the repository Hivebrite/git-template-repository
+
+name: Pull Request
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - ready_for_review
+      - synchronize
+
+permissions:
+  pull-requests: write
+
+jobs:
+  lint_title:
+    name: Lint PR Title
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && !contains('["skip-commit-lint"]', github.event.pull_request.title)
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        id: lint_pr_title
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            build
+            chore
+            ci
+            deps
+            docs
+            feat
+            fix
+            perf
+            refactor
+            test
+          # Configure which scopes are allowed (newline-delimited).
+          # These are regex patterns auto-wrapped in `^ $`.
+          scopes: |
+            ^[a-zA-Z0-9-]*$
+          # Configure that a scope must always be provided.
+          requireScope: false
+          # Configure which scopes are disallowed in PR titles (newline-delimited).
+          # For instance by setting the value below, `chore(release): ...` (lowercase)
+          # and `ci(e2e,release): ...` (unknown scope) will be rejected.
+          # These are regex patterns auto-wrapped in `^ $`.
+          disallowScopes: ""
+          # Configure additional validation for the subject based on a regex.
+          # This example ensures the subject doesn't start with an uppercase character.
+          subjectPattern: ^(?![A-Z])(?:.*?)\W?(?:\[(?:[A-Z]+-[0-9]+)\])$
+          # If `subjectPattern` is configured, you can use this property to override
+          # the default error message that is shown when the pattern doesn't match.
+          # The variables `subject` and `title` can be used within the message.
+          subjectPatternError: |
+            The title `{subject}` didn't match the convention
+
+            ℹ️ Quick reminder:
+              - a type: build, chore, ci, deps, docs, feat, fix, perf, refactor, test
+              - a subject: start with a lowercase character
+              - a jira ticket: [TT-0000]
+              - do not start or end with a space
+          # If the PR contains one of these newline-delimited labels, the
+          # validation is skipped. If you want to rerun the validation when
+          # labels change, you might want to use the `labeled` and `unlabeled`
+          # event triggers in your workflow.
+          ignoreLabels: |
+            skip-commit-lint
+            ignore-semantic-pull-request
+          # If you're using a format for the PR title that differs from the traditional Conventional
+          # Commits spec, you can use these options to customize the parsing of the type, scope and
+          # subject. The `headerPattern` should contain a regex where the capturing groups in parentheses
+          # correspond to the parts listed in `headerPatternCorrespondence`.
+          # See: https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser#headerpattern
+          headerPattern: '^(.*?)(?:\((.+)\))?!?:\W(.*)$'
+          headerPatternCorrespondence: type, scope, subject
+      - uses: marocchino/sticky-pull-request-comment@v2
+        # When the previous steps fails, the workflow would stop. By adding this
+        # condition you can continue the execution with the populated error message.
+        if: always() && (steps.lint_pr_title.outputs.error_message != null)
+        with:
+          header: pr-title-lint-error
+          message: |
+            Hey there! 👋🏼
+
+            > [!WARNING]
+            > We require pull request titles to follow the [Hivebrite PR & Commits specification](https://hivebrite.atlassian.net/l/c/tKU25wtm) and it looks like your proposed title needs to be adjusted.
+
+            ${{ steps.lint_pr_title.outputs.error_message }}
+
+      # Delete a previous comment when the issue has been resolved
+      - if: ${{ steps.lint_pr_title.outputs.error_message == null }}
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: pr-title-lint-error
+          delete: true
