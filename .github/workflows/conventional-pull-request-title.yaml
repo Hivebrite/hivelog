@@ -56,7 +56,7 @@ jobs:
           # the default error message that is shown when the pattern doesn't match.
           # The variables `subject` and `title` can be used within the message.
           subjectPatternError: |
-            The title `{subject}` didn't match the convention
+            The title `{title}` didn't match the convention
 
             ℹ️ Quick reminder:
               - a type: build, chore, ci, deps, docs, feat, fix, perf, refactor, test
