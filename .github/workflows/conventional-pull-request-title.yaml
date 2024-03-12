@@ -20,7 +20,6 @@ jobs:
   lint_title:
     name: Lint PR Title
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && !contains('[skip-commit-lint]', github.event.pull_request.title)
     steps:
       - uses: amannn/action-semantic-pull-request@v5
         id: lint_pr_title
@@ -51,7 +50,7 @@ jobs:
           disallowScopes: ""
           # Configure additional validation for the subject based on a regex.
           # This example ensures the subject doesn't start with an uppercase character.
-          subjectPattern: ^(?![A-Z])(?:.*?)\W?(?:\[(?:[A-Z]+-[0-9]+)\])$
+          subjectPattern: ^(?![A-Z])(?:.*?)\W?(?:\[(?:[A-Z]+-[0-9]+|skip-commit-lint)\])$
           # If `subjectPattern` is configured, you can use this property to override
           # the default error message that is shown when the pattern doesn't match.
           # The variables `subject` and `title` can be used within the message.
@@ -96,4 +95,30 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: pr-title-lint-error
+          delete: true
+
+      # When the title of the pull request contains [skip-commit-lint],
+      # we add a comment to inform the user that the commit linting process will
+      # be skipped and we provide a link to the Hivebrite PR & Commits specification.
+      - if: contains(github.event.pull_request.title, '[skip-commit-lint]')
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: pr-title-skip-commit-lint
+          message: |
+            Hey there! 👋🏼
+
+            > [!WARNING]
+            > We noticed that you added `[skip-commit-lint]` to the title of your pull request. This will skip the commit linting process. 
+            > Be sure to use this tag only when necessary and to follow the [Hivebrite PR & Commits specification](https://hivebrite.atlassian.net/l/c/tKU25wtm) for your other pull requests.
+            >
+            > To have a better understanding of the context of your pull request and to help the reviewers, we recommend you attach a Jira ticket to your pull request title.
+            > 
+            > If your pull request is related to any Jira ticket (also if the ticket are already Done), you can add the Jira ticket number to the title of your pull request like this: `[TT-0000]`.
+
+      # When the user removes the [skip-commit-lint] tag from the title of the
+      # pull request, we delete the previous comment.
+      - if: "!contains(github.event.pull_request.title, '[skip-commit-lint]')"
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: pr-title-skip-commit-lint
           delete: true
