@@ -40,7 +40,7 @@ jobs:
           # Configure which scopes are allowed (newline-delimited).
           # These are regex patterns auto-wrapped in `^ $`.
           scopes: |
-            ^[a-zA-Z0-9-]*$
+            ^[a-zA-Z0-9-].*$
           # Configure that a scope must always be provided.
           requireScope: false
           # Configure which scopes are disallowed in PR titles (newline-delimited).
