@@ -109,11 +109,11 @@ jobs:
             Hey there! 👋🏼
 
             > [!WARNING]
-            > We noticed that you added `[skip-commit-lint]` to the title of your pull request. This will skip the commit linting process. 
+            > We noticed that you added `[skip-commit-lint]` to the title of your pull request. This will skip the commit linting process.
             > Be sure to use this tag only when necessary and to follow the [Hivebrite PR & Commits specification](https://hivebrite.atlassian.net/l/c/tKU25wtm) for your other pull requests.
             >
             > To have a better understanding of the context of your pull request and to help the reviewers, we recommend you attach a Jira ticket to your pull request title.
-            > 
+            >
             > If your pull request is related to any Jira ticket (also if the ticket are already Done), you can add the Jira ticket number to the title of your pull request like this: `[TT-0000]`.
 
       # When the user removes the [skip-commit-lint] tag from the title of the
