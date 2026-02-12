@@ -8,5 +8,5 @@ on:
   pull_request:
     types: [opened, edited, ready_for_review, synchronize]
 jobs:
-  call-shared-workflow:
+  lint_title:
     uses: hivebrite/shared-github-workflows/.github/workflows/conventional-pull-request-title.yml@main

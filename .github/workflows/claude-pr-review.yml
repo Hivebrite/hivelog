@@ -10,5 +10,5 @@ on:
   issue_comment:
     types: [created]
 jobs:
-  call-shared-workflow:
+  claude-pr-review:
     uses: hivebrite/shared-github-workflows/.github/workflows/claude-pr-review.yml@main

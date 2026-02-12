@@ -14,5 +14,5 @@ on:
   pull_request_review:
     types: [submitted]
 jobs:
-  call-shared-workflow:
+  claude-interactive:
     uses: hivebrite/shared-github-workflows/.github/workflows/claude-interactive.yml@main
