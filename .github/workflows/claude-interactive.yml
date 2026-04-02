@@ -18,5 +18,4 @@ jobs:
     uses: hivebrite/shared-github-workflows/.github/workflows/claude-interactive.yml@main
     secrets:
       REPO_READ_ONLY_GITHUB_APP_ID: ${{ secrets.REPO_READ_ONLY_GITHUB_APP_ID }}
-      REPO_READ_ONLY_GITHUB_APP_PRIVATE_KEY: ${{ secrets.REPO_READ_ONLY_GITHUB_APP_PRIVATE_KEY
-        }}
+      REPO_READ_ONLY_GITHUB_APP_PRIVATE_KEY: ${{ secrets.REPO_READ_ONLY_GITHUB_APP_PRIVATE_KEY }}
