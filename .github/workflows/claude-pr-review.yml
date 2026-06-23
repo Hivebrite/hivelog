@@ -11,4 +11,8 @@ on:
     types: [created]
 jobs:
   claude-pr-review:
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
     uses: hivebrite/shared-github-workflows/.github/workflows/claude-pr-review.yml@main

@@ -15,6 +15,12 @@ on:
     types: [submitted]
 jobs:
   claude-interactive:
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
     uses: hivebrite/shared-github-workflows/.github/workflows/claude-interactive.yml@main
     secrets:
       REPO_READ_ONLY_GITHUB_APP_ID: ${{ secrets.REPO_READ_ONLY_GITHUB_APP_ID }}
