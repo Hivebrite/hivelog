@@ -16,3 +16,5 @@ jobs:
       pull-requests: write
       id-token: write
     uses: hivebrite/shared-github-workflows/.github/workflows/claude-pr-review.yml@main
+    secrets:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}

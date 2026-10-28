@@ -17,3 +17,5 @@ jobs:
       pull-requests: write
       id-token: write
     uses: hivebrite/shared-github-workflows/.github/workflows/renovate-analyst.yml@main
+    secrets:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
