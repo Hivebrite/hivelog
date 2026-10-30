@@ -9,4 +9,7 @@ on:
     types: [opened, edited, ready_for_review, synchronize]
 jobs:
   lint_title:
+    permissions:
+      contents: read
+      pull-requests: write
     uses: hivebrite/shared-github-workflows/.github/workflows/conventional-pull-request-title.yml@main
